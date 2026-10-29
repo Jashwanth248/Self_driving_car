@@ -1,6 +1,11 @@
 build/
+build-*/
 .vscode/
 .idea/
 *.o
+*.obj
 *.exe
 .DS_Store
+telemetry.csv
+config/new_weights.txt
+__pycache__/
