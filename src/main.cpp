@@ -11,8 +11,9 @@ int main(){
  for(int tick=0;tick<600;++tick){
  auto s=simulator.step(0.1);
  if(tick%10==0)std::cout<<tick*0.1<<','<<s.vehicle.position.x<<','<<s.vehicle.speed<<','<<s.distance_to_obstacle<<','<<s.risk<<','<<s.control.throttle<<','<<s.control.brake<<'\n';
- if(s.vehicle.position.x>=33.99&&s.vehicle.speed==0){
- std::cout<<"PASS: stopped 2m before obstacle (simulated)\n";return 0;
+ if(s.boundary_crossed){std::cerr<<"FAIL: crossed stopping boundary\n";return 1;}
+ if(s.natural_stop){
+ std::cout<<"PASS: natural braking stop before obstacle at x="<<s.vehicle.position.x<<"m\n";return 0;
  }
  }
  std::cerr<<"FAIL: vehicle did not reach designated stopping position\n";
